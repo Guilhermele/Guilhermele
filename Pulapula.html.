@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Círculo Pulando</title>
+  <style>
+    canvas {
+      display: block;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let circleY = canvas.height / 2;
+    let circleX = canvas.width / 2;
+    let radius = 50;
+    let direction = 1;
+    let speed = 2;
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Desenha o círculo
+      ctx.beginPath();
+      ctx.arc(circleX, circleY, radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#e74c3c';
+      ctx.fill();
+      ctx.closePath();
+
+      // Atualiza a posição
+      circleY += direction * speed;
+
+      // Inverte a direção se atingir o topo ou a base
+      if (circleY + radius > canvas.height || circleY - radius < 0) {
+        direction *= -1;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
