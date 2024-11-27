@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animação com JavaScript</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    // Seleção do canvas e configuração do contexto
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Ajusta o tamanho do canvas para ocupar a tela inteira
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Propriedades do quadrado
+    let squareX = 0;
+    let squareY = canvas.height / 2 - 25;
+    let squareSize = 50;
+    let velocity = 2;
+
+    // Função de animação
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
+      ctx.fillStyle = '#3498db'; // Cor do quadrado
+      ctx.fillRect(squareX, squareY, squareSize, squareSize); // Desenha o quadrado
+
+      // Atualiza a posição do quadrado
+      squareX += velocity;
+
+      // Faz o quadrado voltar ao início ao sair da tela
+      if (squareX > canvas.width) {
+        squareX = -squareSize;
+      }
+
+      // Chama a próxima animação
+      requestAnimationFrame(animate);
+    }
+
+    // Inicia a animação
+    animate();
+  </script>
+</body>
+</html>
